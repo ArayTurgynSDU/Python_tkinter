@@ -62,7 +62,9 @@ def open_dialog():
     #ENTRYFIELD FOR Password
     label2=Label(f1,text="Password")
     label2.grid(row=1,column=0)
-    field2=Entry(f1,textvar=ps)
+    #field2=Entry(f1,textvar=ps)    
+    field2=Entry(f1,show="*")
+
     field2.grid(row=1,column=1)
     # #ENTRYFIELD FOR NAME
     label3=Label(f1,text="Name")
