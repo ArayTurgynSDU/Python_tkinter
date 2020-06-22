@@ -11,44 +11,45 @@ class Main(tkinter.Frame):
         super().__init__(root)
         self.init_main()
     def init_main(self):
-    	def login():
-    		# Connect to database
-    		db = sqlite3.connect('Form.db')
-    		c = db.cursor()
-    		username = lblusername.get()
-    		password = lblpassword.get()
-    		
-    		c.execute('SELECT * FROM Student WHERE username = ? AND password = ?', (username, password))
-    		
-    		if c.fetchall():
-    			showinfo(title = "success", message = "Username and password correct")
-    			# self.destroy()
-    			self.destroy()
-    			from frontend import Window
-    			window = Tk()
-    			Window(window)
-    			# from subprocess import call
-    			# call(["python3 frontend.py"])
-    			
-    		else:
-    			showerror(title = "warning", message = "incorrect username or password")
-    			
-    		c.close()
+        def login():
+            # Connect to database
+            db = sqlite3.connect('Form.db')
+            c = db.cursor()
+            
+            username = lblusername.get()
+            password = lblpassword.get()
+            
+            c.execute('SELECT * FROM Student WHERE username = ? AND password = ?', (username, password))
+            
+            if c.fetchall():
+                showinfo(title = "success", message = "Username and password correct")
+                # self.destroy()
+                self.destroy()
+                from frontend import Window
+                window = Tk()
+                Window(window)
+                # from subprocess import call
+                # call(["python3 frontend.py"])
+                
+            else:
+                showerror(title = "warning", message = "incorrect username or password")
+                
+            c.close()
 
-    	bg_color = "white"
-    	fg_color = "#383a39"
-    	# -------username
-    	tkinter.Label(self,  text="Username:", fg=fg_color, bg=bg_color, font=("Helvetica", 15)).grid(row=8, padx=(50, 0), pady=(20, 10))
-    	lblusername = tkinter.Entry(self)
-    	lblusername.grid(row=8, column=1, padx=(10, 10), pady=(20, 10))
+        bg_color = "white"
+        fg_color = "#383a39"
+        # -------username
+        tkinter.Label(self,  text="Username:", fg=fg_color, bg=bg_color, font=("Helvetica", 15)).grid(row=8, padx=(50, 0), pady=(20, 10))
+        lblusername = tkinter.Entry(self)
+        lblusername.grid(row=8, column=1, padx=(10, 10), pady=(20, 10))
 
-    	# ----password
-    	tkinter.Label(self,  text="Password:", fg=fg_color, bg=bg_color, font=("Helvetica", 15)).grid(row=9, padx=(50, 0), pady=(20, 10))
-    	lblpassword = tkinter.Entry(self)
-    	lblpassword.grid(row=9, column=1, padx=(10, 10),pady=(20, 10))
+        # ----password
+        tkinter.Label(self,  text="Password:", fg=fg_color, bg=bg_color, font=("Helvetica", 15)).grid(row=9, padx=(50, 0), pady=(20, 10))
+        lblpassword = tkinter.Entry(self)
+        lblpassword.grid(row=9, column=1, padx=(10, 10),pady=(20, 10))
 
-    	# --------button
-    	tkinter.Button(self, text="Login",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 15, command = login).grid(row = 10,  padx=(50, 0), pady=(20, 10))
+        # --------button
+        tkinter.Button(self, text="Login",borderwidth=3, relief='ridge', fg=fg_color, bg=bg_color, width = 15, command = login).grid(row = 10,  padx=(50, 0), pady=(20, 10))
 
 if __name__ == "__main__":
     root =tkinter.Tk()
